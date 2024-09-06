@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is Ari and I'm a developer from Las Vegas.</h2>
+<h2 align="left">Hey👋, I'm Ari and I'm a developer from Las Vegas.</h2>
 
 ###
 
