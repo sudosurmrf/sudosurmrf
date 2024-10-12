@@ -48,6 +48,9 @@
 
 <br clear="both">
 
-<img src="https://raw.githubusercontent.com/sudosurmrf/sudosurmrf/output/snake.svg" alt="Snake animation" />
+## 📊 WakaTime Stats
 
-###
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
+
+<img src="https://raw.githubusercontent.com/sudosurmrf/sudosurmrf/output/snake.svg" alt="Snake animation" />
