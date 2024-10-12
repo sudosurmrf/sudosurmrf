@@ -1,28 +1,33 @@
-# GitHub Action for generating a contribution graph with a snake and adding waka-box stats.
+# GitHub Action for generating a contribution graph with a snake eating your contributions.
 
 name: Generate Snake & WakaBox
 
-# This command controls when the action will run. This action runs every 6 hours and can also be triggered manually.
+# Controls when the action will run.
 on:
   schedule:
-    - cron: "0 */12 * * *" # every 6 hours
-  workflow_dispatch:
+    # Run every 12 hours
+    - cron: "0 */12 * * *"
+  workflow_dispatch: # Allows you to manually trigger the workflow
 
 # The sequence of runs in this workflow:
 jobs:
   build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Step 1: Checkout repository
+      # Checks repo under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Generate the snake
+      # Generates the snake  
       - name: Generate Snake GIF
         uses: Platane/snk@v3
         id: snake-gif
         with:
           github_user_name: ${{ github.repository_owner }}
+          # these next 2 lines generate the files on a branch called "output". This keeps the main branch from cluttering up.
           outputs: |
             dist/github-contribution-grid-snake.gif
             dist/github-contribution-grid-snake.svg
@@ -30,18 +35,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 3: Push new files to output branch
-      - name: Push snake animation
+      # Show the status of the build. Makes it easier for debugging (if there's any issues).
+      - name: Show build status
+        run: git status
+
+      # Push new files to output branch
+      - name: Push new files to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
+          # The output branch we mentioned above
           target_branch: output
           build_dir: dist
           commit_message: Update snake animations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 4: Add WakaTime Box
-      - name: Update WakaTime Readme
+      # Update WakaTime Readme with stats
+      - name: Update WakaTime Stats
         uses: matchai/waka-box@v5.0.0
         env:
           WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
