@@ -5,7 +5,7 @@ name: Generate Snake & WakaBox
 # This command controls when the action will run. This action runs every 6 hours and can also be triggered manually.
 on:
   schedule:
-    - cron: "0 */6 * * *" # every 6 hours
+    - cron: "0 */12 * * *" # every 6 hours
   workflow_dispatch:
 
 # The sequence of runs in this workflow:
