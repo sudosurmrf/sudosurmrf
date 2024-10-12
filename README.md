@@ -48,7 +48,6 @@
 
 <br clear="both">
 
-## 📊 Coding time this week:
 
 <!--START_SECTION:waka-->
 <!--END_SECTION:waka-->
