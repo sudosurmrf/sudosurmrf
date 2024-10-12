@@ -1,56 +1,54 @@
-# GitHub Action for generating a contribution graph with a snake eating your contributions.
+# GitHub Action for generating a contribution graph with a snake and adding WakaTime stats to README.
 
-name: Generate Snake & WakaBox
+name: Generate Snake Animation & Update WakaTime Stats
 
-# Controls when the action will run.
 on:
   schedule:
     # Run every 12 hours
     - cron: "0 */12 * * *"
   workflow_dispatch: # Allows you to manually trigger the workflow
+  push:
+    branches:
+      - main # Change to 'master' if your branch is named 'master'
 
-# The sequence of runs in this workflow:
 jobs:
-  build:
-    # The type of runner that the job will run on
+  generate_snake:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks repo under $GITHUB_WORKSPACE, so your job can access it
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Generates the snake  
-      - name: Generate Snake GIF
-        uses: Platane/snk@v3
-        id: snake-gif
+      # Step 2: Generate snake.svg
+      - name: Generate snake.svg
+        uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          # these next 2 lines generate the files on a branch called "output". This keeps the main branch from cluttering up.
-          outputs: |
-            dist/github-contribution-grid-snake.gif
-            dist/github-contribution-grid-snake.svg
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          outputs: dist/snake.svg?palette=github-dark
 
-      # Show the status of the build. Makes it easier for debugging (if there's any issues).
-      - name: Show build status
-        run: git status
-
-      # Push new files to output branch
-      - name: Push new files to output branch
+      # Step 3: Push snake.svg to the output branch
+      - name: Push snake.svg to the output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
-          # The output branch we mentioned above
           target_branch: output
           build_dir: dist
-          commit_message: Update snake animations
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Update WakaTime Readme with stats
+  update_wakatime:
+    needs: generate_snake
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Update WakaTime stats in README
       - name: Update WakaTime Stats
         uses: matchai/waka-box@v5.0.0
         env:
