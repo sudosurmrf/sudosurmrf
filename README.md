@@ -50,6 +50,11 @@
 
 
 <!--START_SECTION:waka-->
+
+```txt
+No activity tracked
+```
+
 <!--END_SECTION:waka-->
 
 <img src="https://raw.githubusercontent.com/sudosurmrf/sudosurmrf/output/snake.svg" alt="Snake animation" />
