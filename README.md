@@ -52,7 +52,9 @@
 <!--START_SECTION:waka-->
 
 ```txt
-No activity tracked
+Bash         21 mins               ████████████████████████▓   98.93 %
+JavaScript   0 secs                ▒░░░░░░░░░░░░░░░░░░░░░░░░   00.83 %
+Git Config   0 secs                ░░░░░░░░░░░░░░░░░░░░░░░░░   00.24 %
 ```
 
 <!--END_SECTION:waka-->
