@@ -52,9 +52,7 @@
 <!--START_SECTION:waka-->
 
 ```txt
-JSON         13 mins               ████████████████▓░░░░░░░░   67.12 %
-Bash         6 mins                ████████▒░░░░░░░░░░░░░░░░   32.84 %
-Git Config   0 secs                ░░░░░░░░░░░░░░░░░░░░░░░░░   00.04 %
+No activity tracked
 ```
 
 <!--END_SECTION:waka-->
